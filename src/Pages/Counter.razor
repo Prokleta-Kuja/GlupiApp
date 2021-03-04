@@ -1,20 +1,22 @@
 @page "/counter"
 
-<h1>Counter 1</h1>
+<h1 id="page-title">Counters</h1>
 
-<p>Current count: @currentCount1</p>
+<h2>Counter 1</h2>
+
+<p id="result-1">Current count: @currentCount1</p>
 
 <button id="prvi-button" class="btn btn-primary" @onclick="IncrementCount1">Click me</button>
 
-<h1>Counter 2</h1>
+<h2>Counter 2</h2>
 
-<p>Current count: @currentCount2</p>
+<p id="result-2" data-value=@currentCount2>Current count: @currentCount2</p>
 
 <button id="drugi-button" class="btn btn-primary" @onclick="IncrementCount2">Click me</button>
 
-<h1>Counter 3</h1>
+<h2>Counter 3</h2>
 
-<p>Current count: @currentCount3</p>
+<p id="result-3">Current count: @currentCount3</p>
 
 <button id="treci-button" class="btn btn-primary" @onclick="IncrementCount3">Click me</button>
 

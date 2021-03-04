@@ -1,0 +1,84 @@
+{
+  "id": "89972c7f-14eb-4bee-a1fc-824e25671889",
+  "version": "2.0",
+  "name": "GlupiApp",
+  "url": "http://localhost:5000",
+  "tests": [{
+    "id": "95d5287c-1b0d-4975-a7dd-66c70d88df4a",
+    "name": "Counter 2 2x",
+    "commands": [{
+      "id": "bba23b54-0f86-4dda-9b12-48e0844f1795",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3db33979-0b4a-465a-8f6f-4d612fde7878",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a7eeb6b-0796-4342-8a5b-5ad66e8e8efe",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Counter",
+      "targets": [
+        ["linkText=Counter", "linkText"],
+        ["css=.nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Counter')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'counter')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Counter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0658f4a-a9d3-45a2-bdcf-6930f233ed3d",
+      "comment": "",
+      "command": "click",
+      "target": "id=drugi-button",
+      "targets": [
+        ["id=drugi-button", "id"],
+        ["css=#drugi-button", "css:finder"],
+        ["xpath=//button[@id='drugi-button']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2988372d-a574-438b-98e3-f2df9d31a40c",
+      "comment": "",
+      "command": "click",
+      "target": "id=drugi-button",
+      "targets": [
+        ["id=drugi-button", "id"],
+        ["css=#drugi-button", "css:finder"],
+        ["xpath=//button[@id='drugi-button']", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34a7b51a-6449-4497-892f-22c3c2d9d3be",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=p:nth-child(5)",
+      "targets": [
+        ["css=p:nth-child(5)", "css:finder"],
+        ["xpath=//p[2]", "xpath:position"],
+        ["xpath=//p[contains(.,'Current count: 2')]", "xpath:innerText"]
+      ],
+      "value": "Current count: 2"
+    }]
+  }],
+  "suites": [{
+    "id": "b3fc4616-d629-4276-91c2-5790c2ededf8",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["95d5287c-1b0d-4975-a7dd-66c70d88df4a"]
+  }],
+  "urls": ["http://localhost:5000/"],
+  "plugins": []
+}
