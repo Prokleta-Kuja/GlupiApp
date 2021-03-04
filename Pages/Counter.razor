@@ -1,16 +1,29 @@
 @page "/counter"
 
-<h1>Counter</h1>
+<h1>Counter 1</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current count: @currentCount1</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button id="prvi-button" class="btn btn-primary" @onclick="IncrementCount1">Click me</button>
+
+<h1>Counter 2</h1>
+
+<p>Current count: @currentCount2</p>
+
+<button id="drugi-button" class="btn btn-primary" @onclick="IncrementCount2">Click me</button>
+
+<h1>Counter 3</h1>
+
+<p>Current count: @currentCount3</p>
+
+<button id="treci-button" class="btn btn-primary" @onclick="IncrementCount3">Click me</button>
 
 @code {
-    private int currentCount = 0;
+    private int currentCount1 = 0;
+    private int currentCount2 = 0;
+    private int currentCount3 = 0;
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
+    private void IncrementCount1() => currentCount1++;
+    private void IncrementCount2() => currentCount2++;
+    private void IncrementCount3() => currentCount3++;
 }
