@@ -16,29 +16,48 @@ namespace GlupiApp.Tests
         {
             Driver = Infrastructure.GetInstance();
             Waiter = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
-        }
-
-        [Fact]
-        public void TestName()
-        {
-            var home = new HomePage(Driver);
-            home.Open();
-            home.NavigateTo(Navigation.Counters);
-
-            Waiter.Until(ExpectedConditions.TextToBePresentInElementLocated(By.Id("page-title"), "Counters"));
-
-            var drugiButton = Driver.FindElement(By.Id("drugi-button"));
-            drugiButton.Click();
-            drugiButton.Click();
-            drugiButton.Click();
-            drugiButton.Click();
-
-            Waiter.Until(ExpectedConditions.TextToBePresentInElementLocated(By.Id("result-2"), "Current count: 4"));
+            Waiter.PollingInterval = TimeSpan.FromMilliseconds(250);
         }
 
         public void Dispose()
         {
             Infrastructure.DisposeDriver(Driver);
+        }
+
+        [Theory]
+        [InlineData(2)]
+        [InlineData(4)]
+        [InlineData(6)]
+        [InlineData(8)]
+        public void Counter3(int count)
+        {
+            var counters = new CountersPage(Driver, Waiter);
+            counters.Open();
+
+            for (int i = 0; i < count; i++)
+            {
+                counters.ClickLocator(CountersPage.Button3);
+            }
+
+            Waiter.Until(Expected.TextToBePresentInElementLocated(CountersPage.Result3, $"Current count: {count}"));
+        }
+
+        [Theory]
+        [InlineData(2)]
+        [InlineData(4)]
+        [InlineData(6)]
+        [InlineData(8)]
+        public void Counter2(int count)
+        {
+            var counters = new CountersPage(Driver, Waiter);
+            counters.Open();
+
+            for (int i = 0; i < count; i++)
+            {
+                counters.ClickLocator(CountersPage.Button2);
+            }
+
+            Waiter.Until(Expected.TextToBePresentInElementLocated(CountersPage.Result2, $"Current count: {count}"));
         }
     }
 }
