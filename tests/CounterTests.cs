@@ -25,10 +25,10 @@ namespace GlupiApp.Tests
         }
 
         [Theory]
-        [InlineData(2)]
-        [InlineData(4)]
-        [InlineData(6)]
-        [InlineData(8)]
+        [InlineData(200)]
+        [InlineData(176)]
+        [InlineData(128)]
+        [InlineData(256)]
         public void Counter3(int count)
         {
             var counters = new CountersPage(Driver, Waiter);
@@ -43,10 +43,10 @@ namespace GlupiApp.Tests
         }
 
         [Theory]
-        [InlineData(2)]
-        [InlineData(4)]
-        [InlineData(6)]
-        [InlineData(8)]
+        [InlineData(200)]
+        [InlineData(176)]
+        [InlineData(128)]
+        [InlineData(256)]
         public void Counter2(int count)
         {
             var counters = new CountersPage(Driver, Waiter);

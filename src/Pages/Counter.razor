@@ -25,11 +25,7 @@
     private int currentCount2 = 0;
     private int currentCount3 = 0;
 
-    private async Task IncrementCount1()
-    {
-        await Task.Delay(TimeSpan.FromSeconds(10));
-        currentCount1++;
-    }
+    private void IncrementCount1() => currentCount1++;
     private void IncrementCount2() => currentCount2++;
     private void IncrementCount3() => currentCount3++;
 }
