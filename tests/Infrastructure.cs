@@ -9,15 +9,17 @@ namespace GlupiApp.Tests
     {
         public static IWebDriver GetInstance(int width = 1366, int height = 768)
         {
-            var driver = GetRemote();
+            //OVO JE BILO DOSAD: var driver = GetRemote();
+            var driver = GetLocal();
             driver.Manage().Window.Size = new System.Drawing.Size(width, height);
             return driver;
         }
+
+        
         private static IWebDriver GetRemote()
         {
             var options = new ChromeOptions();
             var driver = new RemoteWebDriver(new Uri("http://selenium-hub.grid:4444"), options);
-
             return driver;
         }
         private static IWebDriver GetLocal()

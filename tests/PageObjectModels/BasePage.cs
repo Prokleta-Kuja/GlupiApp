@@ -8,6 +8,10 @@ namespace GlupiApp.Tests.PageObjectModels
     {
         public static readonly By PageTitle = By.Id("page-title");
 
+        public static readonly By HomeNav = By.CssSelector("body > div.page > div.sidebar > div.collapse > ul > li:nth-child(1) > a");
+        public static readonly By CountersNav = By.CssSelector("body > div.page > div.sidebar > div.collapse > ul > li:nth-child(2) > a");
+        public static readonly By FetchDataNav = By.CssSelector("body > div.page > div.sidebar > div.collapse > ul > li:nth-child(3) > a");
+
         public IWebDriver Driver { get; set; }
         public WebDriverWait Waiter { get; set; }
 
