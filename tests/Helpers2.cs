@@ -22,6 +22,24 @@ namespace GlupiApp.Tests
                 }
             };
         }
+
+        public static Func<IWebDriver, IWebElement> ClickedAndExists(By locator, By exists)
+        {
+            return (driver) =>
+            {
+                try
+                {
+                    var element = driver.FindElement(locator);
+                    element.Click();
+                    var expectedElement = driver.FindElement(exists);
+                    return expectedElement;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
         public static Func<IWebDriver, bool> TextToBePresentInElementLocated(By locator, string text)
         {
             return (driver) =>
@@ -37,6 +55,11 @@ namespace GlupiApp.Tests
                     return false;
                 }
             };
+        }
+
+        public static Func<IWebDriver, IWebElement> ElementExists(By locator)
+        {
+            return (driver) => { return driver.FindElement(locator); };
         }
     }
 }

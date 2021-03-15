@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using GlupiApp.Tests.Enums;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
@@ -7,15 +9,24 @@ namespace GlupiApp.Tests
 {
     public class Infrastructure
     {
-        public static IWebDriver GetInstance(int width = 1366, int height = 768)
+    
+
+        private static Dictionary<Resolution, System.Drawing.Size> resolutions = new Dictionary<Resolution, System.Drawing.Size>{
+            {Resolution.Mobile, new System.Drawing.Size(640, 610)},
+            {Resolution.Tablet, new System.Drawing.Size(1024, 768)},
+            {Resolution.Desktop, new System.Drawing.Size(1366, 768)},
+        };
+
+    
+
+        public static IWebDriver GetInstance(Resolution resolution = Resolution.Desktop)
         {
-            //OVO JE BILO DOSAD: var driver = GetRemote();
             var driver = GetLocal();
-            driver.Manage().Window.Size = new System.Drawing.Size(width, height);
+            driver.Manage().Window.Size = resolutions[resolution];
             return driver;
         }
 
-        
+
         private static IWebDriver GetRemote()
         {
             var options = new ChromeOptions();

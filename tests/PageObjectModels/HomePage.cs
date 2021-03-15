@@ -13,7 +13,6 @@ namespace GlupiApp.Tests.PageObjectModels
         public void Open()
         {
             Driver.Navigate().GoToUrl("http://localhost:5000");
-
             var titleLocator = By.Id("page-title");
             Waiter.Until(Expected.TextToBePresentInElementLocated(titleLocator, "Hello, world!"));
         }
