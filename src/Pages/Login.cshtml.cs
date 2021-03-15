@@ -41,7 +41,9 @@ public class Login : PageModel
     public async Task<bool> LoginUser()
     {
         var claims = new List<Claim>{
-                new Claim("UserName", "kifla"),
+                new Claim(ClaimTypes.Upn, "kifla"),
+                new Claim(ClaimTypes.Email, "kifla@kifle.com"),
+                new Claim(ClaimTypes.Role, "Admin")
             };
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);

@@ -3,79 +3,86 @@
 
 <h1>Person Registry</h1>
 
-<div class="row">
-    <div class="col">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>First Name</td>
-                        <td>Last Name</td>
-                        <td>OIB</td>
-                        <td>Gender</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary" @onclick=AddClicked>Add</button>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var person in Persons)
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>OIB</td>
+                                <td>Gender</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" @onclick=AddClicked>Add</button>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var person in Persons)
+                            {
+                                <tr @key=person.Id>
+                                    <td>@person.FirstName</td>
+                                    <td>@person.LastName</td>
+                                    <td>@person.OIB</td>
+                                    <td>
+                                        @if(Genders.ContainsKey(person.Gender))
+                                        {
+                                            @Genders.First(g=>g.Key == person.Gender).Value
+                                        }
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary"
+                                            @onclick="()=>EditClicked(person)">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                @if (Selected != null)
+                {
+                    @if(Selected.Id == 0)
                     {
-                        <tr @key=person.Id>
-                            <td>@person.FirstName</td>
-                            <td>@person.LastName</td>
-                            <td>@person.OIB</td>
-                            <td>
-                                @if(Genders.ContainsKey(person.Gender))
-                                {
-                                    @Genders.First(g=>g.Key == person.Gender).Value
-                                }
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-secondary"
-                                    @onclick="()=>EditClicked(person)">Edit</button>
-                            </td>
-                        </tr>
+                        <legend>Add Account</legend>
+                        <form @onsubmit=SaveCreateClicked>
+                            <TextBox For=@nameof(Person.FirstName) Label=FirstName @bind-Value=Selected.FirstName Errors=_errors Required />
+                            <TextBox For=@nameof(Person.LastName) Label=LastName @bind-Value=Selected.LastName Errors=_errors Required />
+                            <TextBox For=@nameof(Person.OIB) Label=OIB @bind-Value=Selected.OIB Errors=_errors Required />
+                            <Dropdown For=@nameof(Person.Gender) Label=Gender
+                                @bind-Value=Selected.Gender Errors=_errors Required Items=Genders />
+                                
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-outline-danger" @onclick=CancelClicked>Cancel</button>
+                        </form>            
                     }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col">
-        @if (Selected != null)
-        {
-            @if(Selected.Id == 0)
-            {
-                <legend>Add Account</legend>
-                <form @onsubmit=SaveCreateClicked>
-                    <TextBox For=@nameof(Person.FirstName) Label=FirstName @bind-Value=Selected.FirstName Errors=_errors Required />
-                    <TextBox For=@nameof(Person.LastName) Label=LastName @bind-Value=Selected.LastName Errors=_errors Required />
-                    <TextBox For=@nameof(Person.OIB) Label=OIB @bind-Value=Selected.OIB Errors=_errors Required />
-                    <Dropdown For=@nameof(Person.Gender) Label=Gender
-                        @bind-Value=Selected.Gender Errors=_errors Required Items=Genders />
-                        
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-outline-danger" @onclick=CancelClicked>Cancel</button>
-                </form>            
-            }
-            else
-            {
-                <legend>Edit @Selected.FirstName</legend>
-                <form @onsubmit=SaveEditClicked>
-                    <TextBox For=@nameof(Person.FirstName) Label=FirstName @bind-Value=Selected.FirstName Errors=_errors Required />
-                    <TextBox For=@nameof(Person.LastName) Label=LastName @bind-Value=Selected.LastName Errors=_errors Required />
-                    <TextBox For=@nameof(Person.OIB) Label=OIB @bind-Value=Selected.OIB Errors=_errors Required />
-                    <Dropdown For=@nameof(Person.Gender) Label=Gender
-                        @bind-Value=Selected.Gender Errors=_errors Required Items=Genders />
+                    else
+                    {
+                        <legend>Edit @Selected.FirstName</legend>
+                        <form @onsubmit=SaveEditClicked>
+                            <TextBox For=@nameof(Person.FirstName) Label=FirstName @bind-Value=Selected.FirstName Errors=_errors Required />
+                            <TextBox For=@nameof(Person.LastName) Label=LastName @bind-Value=Selected.LastName Errors=_errors Required />
+                            <TextBox For=@nameof(Person.OIB) Label=OIB @bind-Value=Selected.OIB Errors=_errors Required />
+                            <Dropdown For=@nameof(Person.Gender) Label=Gender
+                                @bind-Value=Selected.Gender Errors=_errors Required Items=Genders />
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-outline-danger" @onclick=CancelClicked>Cancel</button>
-                </form>
-            }
-        }
-        else
-        {
-            <div class="alert alert-info">Select Person to edit or add.</div>
-        }
-    </div>
-</div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-outline-danger" @onclick=CancelClicked>Cancel</button>
+                        </form>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info">Select Person to edit or add.</div>
+                }
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="text-danger">Niste autorizirani</div>
+    </NotAuthorized>
+</AuthorizeView>
