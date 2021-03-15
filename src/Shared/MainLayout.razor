@@ -1,4 +1,5 @@
 @inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="page">
     <div class="sidebar">
@@ -7,7 +8,14 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            @if (_authenticated)
+            {
+                <a href="login">Odjavi se</a>
+            }
+            else
+            {
+                <a href="login">Prijava</a>
+            }
         </div>
 
         <div class="content px-4">
@@ -15,3 +23,18 @@
         </div>
     </div>
 </div>
+
+@code{
+    private System.Security.Claims.ClaimsPrincipal _user;
+    private bool _authenticated;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        _user = state.User;
+        _authenticated = _user?.Identity?.IsAuthenticated ?? false;
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,28 @@
+@page
+@model Login
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlupiApp</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="GlupiApp.styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Prijava</h1>
+
+    <div class="container-md">
+        <form method="post">
+            <input asp-for="UserName" />
+            <input type="password" asp-for="Password" />
+
+            <input type="submit" value="Prijava" class="btn btn-primary" />
+        </form>
+    </div>
+</body>
