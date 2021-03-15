@@ -12,6 +12,10 @@ namespace GlupiApp.Data
         public string LastName { get; set; }
         public string OIB { get; set; }
         public int Gender { get; set; }
+
+        public int CreatedById { get; set; }
+        public User CreatedBy { get; set; }
+
         public Dictionary<string, string> Validate()
         {
             var errors = new Dictionary<string, string>();

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GlupiApp.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlupiApp
 {
@@ -32,6 +33,11 @@ namespace GlupiApp
             services.AddSingleton<WeatherForecastService>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddHttpContextAccessor();
+            services.AddDbContext<AppDbContext>(builder =>
+            {
+                builder.UseSqlite("Data Source=app.db");
+                builder.EnableSensitiveDataLogging(System.Diagnostics.Debugger.IsAttached);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

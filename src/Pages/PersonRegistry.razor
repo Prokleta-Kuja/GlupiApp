@@ -15,6 +15,7 @@
                                 <td>Last Name</td>
                                 <td>OIB</td>
                                 <td>Gender</td>
+                                <td>Created By</td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-primary" @onclick=AddClicked>Add</button>
                                 </td>
@@ -33,6 +34,7 @@
                                             @Genders.First(g=>g.Key == person.Gender).Value
                                         }
                                     </td>
+                                    <td>@person.CreatedBy?.UserName</td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-secondary"
                                             @onclick="()=>EditClicked(person)">Edit</button>
